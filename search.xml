@@ -4,6 +4,406 @@
   
     
     <entry>
+      <title>Linux下SSH远程连接断开后让程序继续运行解决办法、在后台运行</title>
+      <link href="posts/348c.html"/>
+      <url>posts/348c.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Linux下SSH远程连接断开后让程序继续运行解决办法、在后台运行"><a href="#Linux下SSH远程连接断开后让程序继续运行解决办法、在后台运行" class="headerlink" title="Linux下SSH远程连接断开后让程序继续运行解决办法、在后台运行"></a>Linux下SSH远程连接断开后让程序继续运行解决办法、在后台运行</h1><h2 id="碰到问题："><a href="#碰到问题：" class="headerlink" title="碰到问题："></a>碰到问题：</h2><p>通过SSH远程登录到Linux系统，要在/home目录下面下载一个安装包。</p><p>在下载的过程中，不小心把SSH远程连接关闭了，这个时候下载也会中断。</p><p>必须重新登录到系统，再次手动执行命令，才能继续下载之前未下载完成的文件。</p><p>有没有办法在SSH远程连接被断开或者关闭的时候，系统里面的下载程序还能继续运行？</p><p>再次登录到系统之后，还能够看都上次正在下载的文件？</p><h2 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h2><ol><li>安装screen命令</li></ol><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">screen</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol><li>创建screen会话</li></ol><p>自定义screen虚拟终端的名称，可以改为你想要的名称。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">screen</span> -S  model_run   <span class="token comment"># model_run 就是我设置的会话名称</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol><li>Do whatever you want to</li></ol><p>你可以在连接的电脑上做你之前想做的，比如下载东西，或者跑模型等。</p><ol><li>关闭SSH连接，测试是否成功</li></ol><p>关闭SSH远程连接窗口，然后重新登录。</p><ol><li>查看之前的下载会话虚拟终端</li></ol><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">screen</span> -r model_run <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ol><li>可以看到任务还在继续进行，目的达到！</li></ol><h2 id="扩展阅读："><a href="#扩展阅读：" class="headerlink" title="扩展阅读："></a>扩展阅读：</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">screen</span> -ls  <span class="token comment">#查看所有screen会话</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>按键盘上面的Ctrl+a，然后再按d #保存当前的screen会话</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">exit</span>   <span class="token comment">#退出screen</span><span class="token function">screen</span> -wipe  model_run   <span class="token comment">#删除会话</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Raspberry Pi (树莓派) 安装 vim 编辑器</title>
+      <link href="posts/c70.html"/>
+      <url>posts/c70.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Raspberry-Pi-树莓派-安装-vim-编辑器"><a href="#Raspberry-Pi-树莓派-安装-vim-编辑器" class="headerlink" title="Raspberry Pi (树莓派) 安装 vim 编辑器"></a>Raspberry Pi (树莓派) 安装 vim 编辑器</h1><h2 id="1-删除默认-vi-编辑器"><a href="#1-删除默认-vi-编辑器" class="headerlink" title="1. 删除默认 vi 编辑器"></a>1. 删除默认 vi 编辑器</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> remove vim-common<span class="token punctuation">[</span>setupvars.sh<span class="token punctuation">]</span> OpenVINO environment initializedpi@raspberrypi:~ $ <span class="token function">sudo</span> <span class="token function">apt-get</span> remove vim-common正在读取软件包列表<span class="token punctuation">..</span>. 完成正在分析软件包的依赖关系树        正在读取状态信息<span class="token punctuation">..</span>. 完成       下列软件包是自动安装的并且现在不需要了：  vim-runtime使用<span class="token string">'sudo apt autoremove'</span>来卸载它<span class="token punctuation">(</span>它们<span class="token punctuation">)</span>。下列软件包将被【卸载】：  <span class="token function">vim</span> vim-common vim-tiny升级了 <span class="token number">0</span> 个软件包，新安装了 <span class="token number">0</span> 个软件包，要卸载 <span class="token number">3</span> 个软件包，有 <span class="token number">0</span> 个软件包未被升级。解压缩后将会空出 <span class="token number">3,053</span> kB 的空间。您希望继续执行吗？ <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span> Y<span class="token punctuation">(</span>正在读取数据库 <span class="token punctuation">..</span>. 系统当前共安装有 <span class="token number">84686</span> 个文件和目录。<span class="token punctuation">)</span>正在卸载 <span class="token function">vim</span> <span class="token punctuation">(</span><span class="token number">2</span>:8.0.0197-4+deb9u1<span class="token punctuation">)</span> <span class="token punctuation">..</span>.update-alternatives: 使用 /usr/bin/vim.tiny 来在自动模式中提供 /usr/bin/vi <span class="token punctuation">(</span>vi<span class="token punctuation">)</span>update-alternatives: 使用 /usr/bin/vim.tiny 来在自动模式中提供 /usr/bin/view <span class="token punctuation">(</span>view<span class="token punctuation">)</span>update-alternatives: 使用 /usr/bin/vim.tiny 来在自动模式中提供 /usr/bin/ex <span class="token punctuation">(</span>ex<span class="token punctuation">)</span>update-alternatives: 使用 /usr/bin/vim.tiny 来在自动模式中提供 /usr/bin/rview <span class="token punctuation">(</span>rview<span class="token punctuation">)</span>正在卸载 vim-tiny <span class="token punctuation">(</span><span class="token number">2</span>:8.0.0197-4+deb9u1<span class="token punctuation">)</span> <span class="token punctuation">..</span>.正在卸载 vim-common <span class="token punctuation">(</span><span class="token number">2</span>:8.0.0197-4+deb9u1<span class="token punctuation">)</span> <span class="token punctuation">..</span>.正在处理用于 mime-support <span class="token punctuation">(</span><span class="token number">3.60</span><span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.正在处理用于 desktop-file-utils <span class="token punctuation">(</span><span class="token number">0.23</span>-1<span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.正在处理用于 man-db <span class="token punctuation">(</span><span class="token number">2.7</span>.6.1-2<span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.正在处理用于 gnome-menus <span class="token punctuation">(</span><span class="token number">3.13</span>.3-9<span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.正在处理用于 hicolor-icon-theme <span class="token punctuation">(</span><span class="token number">0.15</span>-1<span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.pi@raspberrypi:~ $ <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="2-安装-vim-编辑器"><a href="#2-安装-vim-编辑器" class="headerlink" title="2. 安装 vim 编辑器"></a>2. 安装 vim 编辑器</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">vim</span>pi@raspberrypi:~ $ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">vim</span>正在读取软件包列表<span class="token punctuation">..</span>. 完成正在分析软件包的依赖关系树        正在读取状态信息<span class="token punctuation">..</span>. 完成       将会同时安装下列软件：  vim-common建议安装：  ctags vim-doc vim-scripts下列【新】软件包将被安装：  <span class="token function">vim</span> vim-common升级了 <span class="token number">0</span> 个软件包，新安装了 <span class="token number">2</span> 个软件包，要卸载 <span class="token number">0</span> 个软件包，有 <span class="token number">0</span> 个软件包未被升级。需要下载 <span class="token number">159</span> kB/949 kB 的归档。解压缩后会消耗 <span class="token number">2,203</span> kB 的额外空间。您希望继续执行吗？ <span class="token punctuation">[</span>Y/n<span class="token punctuation">]</span> Y获取:1 http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian stretch/main armhf vim-common all <span class="token number">2</span>:8.0.0197-4+deb9u1 <span class="token punctuation">[</span><span class="token number">159</span> kB<span class="token punctuation">]</span>                                                已下载 <span class="token number">159</span> kB，耗时 <span class="token number">20</span>秒 <span class="token punctuation">(</span><span class="token number">7,672</span> B/s<span class="token punctuation">)</span>           正在选中未选择的软件包 vim-common。<span class="token punctuation">(</span>正在读取数据库 <span class="token punctuation">..</span>. 系统当前共安装有 <span class="token number">84619</span> 个文件和目录。<span class="token punctuation">)</span>正准备解包 <span class="token punctuation">..</span>./vim-common_2%3a8.0.0197-4+deb9u1_all.deb  <span class="token punctuation">..</span>.正在解包 vim-common <span class="token punctuation">(</span><span class="token number">2</span>:8.0.0197-4+deb9u1<span class="token punctuation">)</span> <span class="token punctuation">..</span>.正在选中未选择的软件包 vim。正准备解包 <span class="token punctuation">..</span>./vim_2%3a8.0.0197-4+deb9u1_armhf.deb  <span class="token punctuation">..</span>.正在解包 <span class="token function">vim</span> <span class="token punctuation">(</span><span class="token number">2</span>:8.0.0197-4+deb9u1<span class="token punctuation">)</span> <span class="token punctuation">..</span>.正在处理用于 mime-support <span class="token punctuation">(</span><span class="token number">3.60</span><span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.正在处理用于 desktop-file-utils <span class="token punctuation">(</span><span class="token number">0.23</span>-1<span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.正在设置 vim-common <span class="token punctuation">(</span><span class="token number">2</span>:8.0.0197-4+deb9u1<span class="token punctuation">)</span> <span class="token punctuation">..</span>.正在处理用于 man-db <span class="token punctuation">(</span><span class="token number">2.7</span>.6.1-2<span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.正在处理用于 gnome-menus <span class="token punctuation">(</span><span class="token number">3.13</span>.3-9<span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.正在处理用于 hicolor-icon-theme <span class="token punctuation">(</span><span class="token number">0.15</span>-1<span class="token punctuation">)</span> 的触发器 <span class="token punctuation">..</span>.正在设置 <span class="token function">vim</span> <span class="token punctuation">(</span><span class="token number">2</span>:8.0.0197-4+deb9u1<span class="token punctuation">)</span> <span class="token punctuation">..</span>.update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/vim <span class="token punctuation">(</span>vim<span class="token punctuation">)</span>update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/vimdiff <span class="token punctuation">(</span>vimdiff<span class="token punctuation">)</span>update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/rvim <span class="token punctuation">(</span>rvim<span class="token punctuation">)</span>update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/rview <span class="token punctuation">(</span>rview<span class="token punctuation">)</span>update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/vi <span class="token punctuation">(</span>vi<span class="token punctuation">)</span>update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/view <span class="token punctuation">(</span>view<span class="token punctuation">)</span>update-alternatives: 使用 /usr/bin/vim.basic 来在自动模式中提供 /usr/bin/ex <span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派安装Tomcat服务器</title>
+      <link href="posts/239e.html"/>
+      <url>posts/239e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="树莓派安装Tomcat服务器"><a href="#树莓派安装Tomcat服务器" class="headerlink" title="树莓派安装Tomcat服务器"></a>树莓派安装Tomcat服务器</h1><p>1.下载安装包</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>2.解压安装包</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> zxvf apache-tomcat-9.0.36.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>3.启动Tomcat</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /usr/local/tomcat/apache-tomcat-9.0.36/bin<span class="token function">sudo</span> ./startup.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>4.为Tomcat添加Java环境变量：<br>打开Tomcat的bin目录下面的 setclasspath.sh文件</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> setclasspath.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>在开头添加以下部分，Java路径根据自己的安装路径修改 。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span>/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt<span class="token builtin class-name">export</span> <span class="token assign-left variable">JRE_HOME</span><span class="token operator">=</span>/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/jre<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>Java路径配置成功后执行sudo ./startup.sh再次启动Tomcat。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派安装Java</title>
+      <link href="posts/2220.html"/>
+      <url>posts/2220.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="树莓派安装Java"><a href="#树莓派安装Java" class="headerlink" title="树莓派安装Java"></a>树莓派安装Java</h1><p>Java是用于构建各种应用程序和系统的最流行的编程语言之一。</p><p>Java有两种不同的实现，Oracle Java和OpenJDK。 OpenJDK是Java平台的开源实现。 Oracle Java具有其他一些商业功能，并且许可仅允许非商业用途，例如个人或开发用途。</p><p>本指南介绍了如何在运行最新Raspbian OS的Raspberry Pi上安装Java（OpenJDK）。</p><p>标准的Raspbian存储库包括两个不同的Java软件包：Java运行时环境（JRE）和Java开发工具包（JDK）。 JRE包括Java虚拟机（JVM），类和二进制文件，使您可以运行Java程序。 JDK包含JRE以及构建Java应用程序所需的开发/调试工具和库。</p><p>如果您不确定要安装哪个Java软件包，通常的建议是坚持使用默认的OpenJDK（JDK 11）版本。某些基于Java的应用程序可能需要特定版本的Java，因此您应查阅应用程序文档。</p><h2 id="在Raspberry-Pi上安装Java-11"><a href="#在Raspberry-Pi上安装Java-11" class="headerlink" title="在Raspberry Pi上安装Java 11"></a>在Raspberry Pi上安装Java 11</h2><p>OpenJDK 11是最新的Raspbian操作系统中的默认Java开发和运行时，该操作系统基于Debian 10 Buster。</p><p>运行以下命令在您的Raspberry Pi上安装OpenJDK 11 JDK：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> default-jdk<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>安装完成后，通过检查Java版本进行验证：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>输出应如下所示：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openjdk version <span class="token string">"11.0.5"</span> <span class="token number">2019</span>-10-15OpenJDK Runtime Environment <span class="token punctuation">(</span>build <span class="token number">11.0</span>.5+10-post-Raspbian-1deb10u1<span class="token punctuation">)</span>OpenJDK Server VM <span class="token punctuation">(</span>build <span class="token number">11.0</span>.5+10-post-Raspbian-1deb10u1, mixed mode<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>就这样！您已经在Pi上成功安装了Java，就可以开始使用它了。</p><h2 id="在Raspberry-Pi上安装Java-8"><a href="#在Raspberry-Pi上安装Java-8" class="headerlink" title="在Raspberry Pi上安装Java 8"></a>在Raspberry Pi上安装Java 8</h2><p>以前的Java LTS版本8仍受支持并被广泛使用。 如果您的应用程序需要Java 8，请输入以下内容进行安装：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> openjdk-8-jdk<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>通过打印Java版本来验证安装：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>输出应如下所示：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openjdk version <span class="token string">"1.8.0_212"</span>OpenJDK Runtime Environment <span class="token punctuation">(</span>build <span class="token number">1.8</span>.0_212-8u212-b01-1+rpi1-b01<span class="token punctuation">)</span>OpenJDK Client VM <span class="token punctuation">(</span>build <span class="token number">25.212</span>-b01, mixed mode<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="设置默认版本"><a href="#设置默认版本" class="headerlink" title="设置默认版本"></a>设置默认版本</h2><p>如果您的Pi上安装了多个Java版本，请运行<code>java -version</code>命令以检查默认版本：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>要更改默认版本，请使用<code>update-alternatives</code>工具：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> update-alternatives --config java<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>输出如下所示：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">There are <span class="token number">2</span> choices <span class="token keyword">for</span> the alternative java <span class="token punctuation">(</span>providing /usr/bin/java<span class="token punctuation">)</span>.   Selection    Path                                            Priority   Status------------------------------------------------------------* <span class="token number">0</span>            /usr/lib/jvm/java-11-openjdk-armhf/bin/java      <span class="token number">1111</span>      auto mode  <span class="token number">1</span>            /usr/lib/jvm/java-11-openjdk-armhf/bin/java      <span class="token number">1111</span>      manual mode  <span class="token number">2</span>            /usr/lib/jvm/java-8-openjdk-armhf/jre/bin/java   <span class="token number">1081</span>      manual mode Press <span class="token operator">&lt;</span>enter<span class="token operator">&gt;</span> to keep the current choice<span class="token punctuation">[</span>*<span class="token punctuation">]</span>, or <span class="token builtin class-name">type</span> selection number: <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>您将看到所有已安装的Java版本的列表。 输入要设置为默认版本的版本号，然后按<code>Enter</code>回车。</p><h2 id="JAVA-HOME环境变量"><a href="#JAVA-HOME环境变量" class="headerlink" title="JAVA_HOME环境变量"></a>JAVA_HOME环境变量</h2><p>一些Java应用程序使用<code>JAVA_HOME</code>环境变量来确定Java安装位置。</p><p>要设置<code>JAVA_HOME</code>环境变量，请使用<code>update-alternatives</code>命令查找Java的安装位置：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> update-alternatives --config java<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>在此示例中，安装路径如下：</p><ul><li>OpenJDK 11位于<code>/usr/lib/jvm/java-11-openjdk-armhf/bin/java</code></li><li>OpenJDK 8位于<code>/usr/lib/jvm/java-8-openjdk-armhf/jre/bin/java</code></li></ul><p>找到Java安装路径后，打开<code>/etc/environment</code>文件：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/environment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>假设要将<code>JAVA_HOME</code>设置为OpenJDK 11，请在文件末尾添加以下行：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span><span class="token string">"/usr/lib/jvm/java-11-openjdk-armhf/bin/java"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>为了使更改在当前的外壳程序上生效，您可以注销并登录或运行以下源命令：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> /etc/environment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>要验证是否设置了<code>JAVA_HOME</code>变量，请输入：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token variable">$JAVA_HOME</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>您应该看到Java 11二进制文件的路径：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/usr/lib/jvm/java-11-openjdk-armhf/bin/java<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><code>/etc/environment</code>是系统范围的配置文件，所有用户都可以使用。 如果要基于每个用户设置<code>JAVA_HOME</code>变量，请将行添加到<code>.bashrc</code>或用户登录时加载的任何其他配置文件中。</p><h2 id="卸载-Java"><a href="#卸载-Java" class="headerlink" title="卸载 Java"></a>卸载 Java</h2><p>您可以像使用<code>apt</code>安装的任何其他软件包一样卸载Java。</p><p>例如，要卸载<code>default-jdk</code>软件包，只需运行：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> remove default-jdk<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派更改账户</title>
+      <link href="posts/8aaa.html"/>
+      <url>posts/8aaa.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="树莓派更改账户"><a href="#树莓派更改账户" class="headerlink" title="树莓派更改账户"></a>树莓派更改账户</h1><p>树莓派在安装系统之后都会有原始默认的用户名和密码，接下来我们可以自行修改树莓派的用户密码。</p><p>环境：</p><p>树莓派系统：raspbian，默认的用户名：pi，默认密码：raspberry</p><p>修改用户密码：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">passwd</span> pi                   <span class="token comment">#修改 pi 密码  </span><span class="token function">sudo</span> <span class="token function">passwd</span> root                 <span class="token comment">#设置 root 密码    </span><span class="token function">su</span> root                          <span class="token comment">#切换到 root 用户  </span><span class="token function">su</span> pi                            <span class="token comment">#切换到 pi </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>用户 通过以上操作,我们就可以修改用户密码以及进行用户的切换。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决Cannot currently show the desktop</title>
+      <link href="posts/8f4c.html"/>
+      <url>posts/8f4c.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="解决Cannot-currently-show-the-desktop"><a href="#解决Cannot-currently-show-the-desktop" class="headerlink" title="解决Cannot currently show the desktop"></a>解决Cannot currently show the desktop</h1><p>用VNC Viewer登录出现这个情况，</p><p><a href="https://imgtu.com/i/6jjoOf"><img src="https://z3.ax1x.com/2021/03/26/6jjoOf.png" alt="6jjoOf.png"></a></p><p>解决办法：changing the resolution to the highest（更改更高的分辨率即可）</p><p>ssh下：</p><pre class="line-numbers language-none"><code class="language-none">sudo raspi-config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><a href="https://imgtu.com/i/6jjI6P"><img src="https://z3.ax1x.com/2021/03/26/6jjI6P.png" alt="6jjI6P.png"></a></p><p><a href="https://imgtu.com/i/6jj4SI"><img src="https://z3.ax1x.com/2021/03/26/6jj4SI.png" alt="6jj4SI.png"></a></p><p><a href="https://imgtu.com/i/6jj5lt"><img src="https://z3.ax1x.com/2021/03/26/6jj5lt.png" alt="6jj5lt.png"></a></p><p>sudo reboot</p><p>用VNC Viewer登录即可见到最新的树莓派系统。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>设置树莓派时区</title>
+      <link href="posts/d413.html"/>
+      <url>posts/d413.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="设置树莓派时区"><a href="#设置树莓派时区" class="headerlink" title="设置树莓派时区"></a>设置树莓派时区</h1><p>使用root用户，或者使用当前pi用户都行</p><p>输入命令</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">date</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>显示结果：</p><p><a href="https://imgtu.com/i/6jjiRI"><img src="https://z3.ax1x.com/2021/03/26/6jjiRI.png" alt="6jjiRI.png"></a></p><p>上图表示当前系统时间是05：43：07，而此时本人时间是13：43</p><p>输入命令：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">dpkg-reconfigure tzdata<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>调出下面界面</p><p><a href="https://imgtu.com/i/6jjCid"><img src="https://z3.ax1x.com/2021/03/26/6jjCid.png" alt="6jjCid.png"></a></p><p>选择Asia，敲击键盘Enter键（或者按Tab键，将光标切换到底部的OK选项，按Enter键），接着会跳到下面界面</p><p><a href="https://imgtu.com/i/6jjAQP"><img src="https://z3.ax1x.com/2021/03/26/6jjAQP.png" alt="6jjAQP.png"></a></p><p>选择上海，键盘敲击Enter键（或者按Tab键，将光标切换到底部的OK选项，按Enter键），这样就设置ok了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派更换镜像源</title>
+      <link href="posts/4223.html"/>
+      <url>posts/4223.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="树莓派更换镜像源"><a href="#树莓派更换镜像源" class="headerlink" title="树莓派更换镜像源"></a>树莓派更换镜像源</h1><h2 id="一、清华源"><a href="#一、清华源" class="headerlink" title="一、清华源"></a>一、清华源</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这几天使用树莓派的apt-get指令安装一些软件包总出各种问题，更新升级它总是报错，要不就是缺少这个库、要么就是依赖那个包，总之就是无穷无尽的循环。解决办法是更新和升级apt-get</p><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>直接更新升级，很多时候是行不通的，因为系统默认的更新源（这些软件所在的服务器）是树莓派官方提供的，而官方服务器在国外。如果直接用的话，连接速度极慢，有时甚至是直接断线。那么最好的解决办法就是更换国内的源。国内有很多机构开放了软件镜像源给开发者免费使用，如阿里、科大、清华等等<br><a href="https://imgtu.com/i/6jXQKK"><img src="https://z3.ax1x.com/2021/03/26/6jXQKK.png" alt="6jXQKK.png"></a><br>下面就以清华源为例说一下如何更换正确的源的方法</p><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ol><li>树莓派更新apt-get的源列表在<code>/etc/apt/sources.list</code><br>直接用nano编辑器打开它</li></ol><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/apt/sources.list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>一定要注意查看已经的系统镜像是哪一个版本的！</strong><br>而不是网上搜一下树莓派的源就直接复制粘贴一顿猛操作！<br>即使是树莓派的镜像源Debian系统也分好几种，<code>wheezy</code>、<code>jessie</code>、<code>stretch</code>、<code>buster</code>，它们分别对应：</p><table><thead><tr><th>Debian版本</th><th>对应名称</th></tr></thead><tbody><tr><td>Debian7</td><td>wheezy</td></tr><tr><td>Debian8</td><td>jessie</td></tr><tr><td>Debian9</td><td>stretch</td></tr><tr><td>Debian10</td><td>buster</td></tr></tbody></table><ol><li>把官方给的源用<code>#</code>注释掉，我们这里可以看到官方源是<code>buster</code>版本，那么我们添加的清华的软件源就必须得是<code>buster</code>版本的；<br><a href="https://imgtu.com/i/6jXKv6"><img src="https://z3.ax1x.com/2021/03/26/6jXKv6.png" alt="6jXKv6.png"></a></li><li>加上清华的源</li></ol><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpideb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h2 id="二、阿里源"><a href="#二、阿里源" class="headerlink" title="二、阿里源"></a>二、阿里源</h2><p>1.备份以前的源 <code>sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup</code><br>2.输入指令 <code>nano /etc/apt/sources.list</code><br>3.把sources.list文件里的内容删除或者用<code>#</code>注释<br>4.添加下列内容</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">deb https://mirrors.aliyun.com/raspbian/raspbian/ buster main non-free contribdeb-src https://mirrors.aliyun.com/raspbian/raspbian/ buster main non-free contrib<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>5.ctrl+o保存<br>6.enter键确定<br>7.ctrl+x退出编辑<br>(如果保存失败,显示permission denied等,可以尝试第2步中指令改为 <code>sudo nano /etc/apt/sources.list</code>)</p><p>更新软件源<code> sudo apt-get update</code></p><p>另 其他官方镜像站:<br>1.<a href="https://developer.aliyun.com/mirror/">阿里官方镜像站</a><br>2.<a href="https://mirrors.tuna.tsinghua.edu.cn/">清华镜像站</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派检测温度</title>
+      <link href="posts/80d9.html"/>
+      <url>posts/80d9.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="树莓派检测温度"><a href="#树莓派检测温度" class="headerlink" title="树莓派检测温度"></a>树莓派检测温度</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/opt/vc/bin/vcgencmd measure_temp<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><a href="https://imgtu.com/i/6jXSCn"><img src="https://z3.ax1x.com/2021/03/26/6jXSCn.png" alt="6jXSCn.png"></a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派接3.5mm音响没有声音及音量调节</title>
+      <link href="posts/4fb7.html"/>
+      <url>posts/4fb7.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="树莓派接3-5mm音响没有声音及音量调节"><a href="#树莓派接3-5mm音响没有声音及音量调节" class="headerlink" title="树莓派接3.5mm音响没有声音及音量调节"></a>树莓派接3.5mm音响没有声音及音量调节</h1><p>树莓派有两种声音输出方式，一是通过HDMI带输出的显示屏，或者通过3.5mm接口连接耳机或音箱输出。<br>如果连接了3.5mm的设备没声音，有可能是设置没打开。</p><pre class="line-numbers language-none"><code class="language-none">sudo raspi-config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><a href="https://imgtu.com/i/6jOYcV"><img src="https://z3.ax1x.com/2021/03/26/6jOYcV.png" alt="6jOYcV.png"></a></p><p><a href="https://imgtu.com/i/6jOJ10"><img src="https://z3.ax1x.com/2021/03/26/6jOJ10.png" alt="6jOJ10.png"></a></p><p><a href="https://imgtu.com/i/6jOGpq"><img src="https://z3.ax1x.com/2021/03/26/6jOGpq.png" alt="6jOGpq.png"></a></p><p>选完退出就可以使用3.5mm设别播放音乐了。</p><p>可以使用mplayer播放器。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> mplayer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>安装完</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">mplayer /home/1/1.mp3    （填写绝对路径）<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>如果声音太小或者太大，可以打开虚拟调音台调节</p><pre class="line-numbers language-none"><code class="language-none">alsamixer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派开机自启程序</title>
+      <link href="posts/4e02.html"/>
+      <url>posts/4e02.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="树莓派开机自启程序"><a href="#树莓派开机自启程序" class="headerlink" title="树莓派开机自启程序"></a>树莓派开机自启程序</h1><p>以root权限打开终端</p><p>输入</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nano</span> /etc/rc.local<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这个就是我添加的指令</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/home/pi/relife/apache-tomcat-9.0.43/bin/startup.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><a href="https://imgtu.com/i/6jLcwQ"><img src="https://z3.ax1x.com/2021/03/26/6jLcwQ.png" alt="6jLcwQ.png"></a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派设置VNC开机自启动方法</title>
+      <link href="posts/2a2d.html"/>
+      <url>posts/2a2d.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="树莓派设置VNC开机自启动方法"><a href="#树莓派设置VNC开机自启动方法" class="headerlink" title="树莓派设置VNC开机自启动方法"></a>树莓派设置VNC开机自启动方法</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">su</span> pi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>网上搜索了好多关于树莓派vnc开机自启动发的方法，只有这个综合总结的方法用起来没问题。</p><p>第一步：进入最高权限模式并编辑</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">bash</span> 或者 <span class="token function">sudo</span> <span class="token function">su</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>把以下内容写入 </p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/etc/init.d/tightvncserver<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/init.d/tightvncserver<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/sh</span><span class="token comment">### BEGIN INIT INFO</span><span class="token comment"># Provides: tightvncserver</span><span class="token comment"># Required-Start: $syslog $remote_fs $network</span><span class="token comment"># Required-Stop: $syslog $remote_fs $network</span><span class="token comment"># Default-Start: 2 3 4 5</span><span class="token comment"># Default-Stop: 0 1 6</span><span class="token comment"># Short-Description: Starts VNC Server on system start.</span><span class="token comment"># Description: Starts tight VNC Server. Script written by James Swineson.</span><span class="token comment">### END INIT INFO</span><span class="token comment"># /etc/init.d/tightvncserver</span><span class="token assign-left variable">VNCUSER</span><span class="token operator">=</span><span class="token string">'pi'</span><span class="token keyword">case</span> <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token keyword">in</span>        start<span class="token punctuation">)</span>                <span class="token function">su</span> <span class="token variable">$VNCUSER</span> -c <span class="token string">'/usr/bin/tightvncserver :1'</span>                <span class="token builtin class-name">echo</span> <span class="token string">"Starting TightVNC Server for <span class="token variable">$VNCUSER</span>"</span>        <span class="token punctuation">;</span><span class="token punctuation">;</span>        stop<span class="token punctuation">)</span>                <span class="token function">pkill</span> Xtightvnc                <span class="token builtin class-name">echo</span> <span class="token string">"TightVNC Server stopped"</span>        <span class="token punctuation">;</span><span class="token punctuation">;</span>        *<span class="token punctuation">)</span>                <span class="token builtin class-name">echo</span> <span class="token string">"Usage: /etc/init.d/tightvncserver {start|stop}"</span>                <span class="token builtin class-name">exit</span> <span class="token number">1</span>        <span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token keyword">esac</span><span class="token builtin class-name">exit</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>一般情况下，</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">VNCUSER</span><span class="token operator">=</span><span class="token string">'pi'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>中‘pi’为默认的用户pi</p><p>crtl+o保存；ctrl+x：退出；Enter：确定</p><p>第二步：</p><p>修改文件权限</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">755</span> /etc/init.d/tightvncserver<span class="token function">sudo</span> update-rc.d tightvncserver defaults重启看效果吧。取消开机启动也很简单，就一行代码：<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-python" data-language="python"><code class="language-python">sudo update<span class="token operator">-</span>rc<span class="token punctuation">.</span>d <span class="token operator">-</span>f tightvncserver remove<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>如果需要退出最高权限，输入：</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">su pi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>为树莓派启用root系统并开启ssh登录</title>
+      <link href="posts/1db3.html"/>
+      <url>posts/1db3.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="为树莓派启用root系统并开启ssh登录"><a href="#为树莓派启用root系统并开启ssh登录" class="headerlink" title="为树莓派启用root系统并开启ssh登录"></a>为树莓派启用root系统并开启ssh登录</h1><p>出于安全考虑，树莓派的Raspbian系统默认为启用root用户。如需使用，可以自行开启。</p><ol><li>设置root用户密码<br><code>sudo passwd root</code></li><li>启用root用户<br><code>sudo passwd --unlock root</code></li><li>设置ssh允许登录<br><code>sudo sed -i "s/^#PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config</code></li><li>重启ssh服务<br><code>sudo systemctl restart ssh</code></li><li>为root用户应用于当前用户相同的bash配置<br><code>sudo cp ~/.bashrc /root/.bashrc</code></li></ol><p>所有命令如下：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/sh</span><span class="token function">sudo</span> <span class="token function">passwd</span> root<span class="token function">sudo</span> <span class="token function">passwd</span> --unlock root<span class="token function">sudo</span> <span class="token function">sed</span> -i <span class="token string">"s/^#PermitRootLogin.*/PermitRootLogin yes/g"</span> /etc/ssh/sshd_config<span class="token function">sudo</span> systemctl restart <span class="token function">ssh</span><span class="token function">sudo</span> <span class="token function">cp</span> ~/.bashrc /root/.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> raspberry </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> raspberry </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>修改Tomcat默认首页</title>
+      <link href="posts/62e3.html"/>
+      <url>posts/62e3.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="修改Tomcat默认首页"><a href="#修改Tomcat默认首页" class="headerlink" title="修改Tomcat默认首页"></a>修改Tomcat默认首页</h1><p><strong>step1.conf目录下，server.xml</strong></p><p>在<code>&lt;Host&gt;&lt;/Host&gt;</code>标签内增加</p><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Context</span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token attr-name">docBase</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>../webapps/demo/<span class="token punctuation">"</span></span> <span class="token attr-name">debug</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中path是说明虚拟目录的名字，如果你要只输入ip地址就显示主页，则该键值留为空；debug和reloadable一般就设置成0和true就行了。在项目编写和测试阶段reloadable设置为true表示只要tomcat中的项目有改动tomcat就会自动重新加载编译，可以带给我们一些方便，但是在项目发布阶段一般设为false，可以提高tomcat的性能。</p><p><strong>step2.conf目录下，web.xml</strong></p><p>shift+g 跳转到文件尾部</p><p>在<code>&lt;welcome-file-list&gt;</code>标签内 添加你的首页文件</p><p><strong>如：</strong></p><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>welcome-file</span><span class="token punctuation">&gt;</span></span>index.html<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>welcome-file</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后重启tomcat即可</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> JavaWeb </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Tomcat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Ngnix</title>
+      <link href="posts/d538.html"/>
+      <url>posts/d538.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><blockquote><p>转载：秦疆（遇见狂神说）</p></blockquote><h2 id="公司产品出现瓶颈？"><a href="#公司产品出现瓶颈？" class="headerlink" title="公司产品出现瓶颈？"></a>公司产品出现瓶颈？</h2><p>我们公司项目刚刚上线的时候，并发量小，用户使用的少，所以在低并发的情况下，一个jar包启动应用就够了，然后内部tomcat返回内容给用户。<br><a href="https://imgtu.com/i/6jULPf"><img src="https://z3.ax1x.com/2021/03/26/6jULPf.png" alt="6jULPf.png"></a><br>但是慢慢的，使用我们平台的用户越来越多了，并发量慢慢增大了，这时候一台服务器满足不了我们的需求了。<br><a href="https://imgtu.com/i/6jaZM4"><img src="https://z3.ax1x.com/2021/03/26/6jaZM4.png" alt="6jaZM4.png"></a><br>于是我们横向扩展，又增加了服务器。这个时候几个项目启动在不同的服务器上，用户要访问，就需要增加一个代理服务器了，通过代理服务器来帮我们转发和处理请求。<br><a href="https://imgtu.com/i/6jUXRS"><img src="https://z3.ax1x.com/2021/03/26/6jUXRS.md.png" alt="6jUXRS.md.png"></a><br>我们希望这个代理服务器可以帮助我们接收用户的请求，然后将用户的请求按照规则帮我们转发到不同的服务器节点之上。这个过程用户是无感知的，用户并不知道是哪个服务器返回的结果，我们还希望他可以按照服务器的性能提供不同的权重选择。保证最佳体验！所以我们使用了Nginx。</p><h2 id="什么是Nginx？"><a href="#什么是Nginx？" class="headerlink" title="什么是Nginx？"></a>什么是Nginx？</h2><p>Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为俄罗斯访问量第二的Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004年10月4日。2011年6月1日，nginx 1.0.4发布。</p><p>其特点是占有内存少，并发能力强，事实上nginx的并发能力在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。在全球活跃的网站中有12.18%的使用比率，大约为2220万个网站。</p><p>Nginx 是一个安装非常的简单、配置文件非常简洁（还能够支持perl语法）、Bug非常少的服务。Nginx 启动特别容易，并且几乎可以做到7*24不间断运行，即使运行数个月也不需要重新启动。你还能够不间断服务的情况下进行软件版本的升级。</p><p>Nginx代码完全用C语言从头写成。官方数据测试表明能够支持高达 50,000 个并发连接数的响应。</p><h2 id="Nginx作用？"><a href="#Nginx作用？" class="headerlink" title="Nginx作用？"></a>Nginx作用？</h2><blockquote><p>Http代理，反向代理：作为web服务器最常用的功能之一，尤其是反向代理。</p></blockquote><p>正向代理<br><a href="https://imgtu.com/i/6jUOG8"><img src="https://z3.ax1x.com/2021/03/26/6jUOG8.png" alt="6jUOG8.png"></a><br>反向代理<br><a href="https://imgtu.com/i/6jUjxg"><img src="https://z3.ax1x.com/2021/03/26/6jUjxg.png" alt="6jUjxg.png"></a></p><blockquote><p>Nginx提供的负载均衡策略有2种：内置策略和扩展策略。内置策略为轮询，加权轮询，Ip hash。扩展策略，就天马行空，只有你想不到的没有他做不到的。</p></blockquote><p>轮询<br><a href="https://imgtu.com/i/6jaesJ"><img src="https://z3.ax1x.com/2021/03/26/6jaesJ.png" alt="6jaesJ.png"></a><br>加权轮询<br><a href="https://imgtu.com/i/6jaSqs"><img src="https://z3.ax1x.com/2021/03/26/6jaSqs.png" alt="6jaSqs.png"></a><br>iphash对客户端请求的ip进行hash操作，然后根据hash结果将同一个客户端ip的请求分发给同一台服务器进行处理，可以解决session不共享的问题。<br><a href="https://imgtu.com/i/6jUzrj"><img src="https://z3.ax1x.com/2021/03/26/6jUzrj.png" alt="6jUzrj.png"></a></p><blockquote><p>动静分离，在我们的软件开发中，有些请求是需要后台处理的，有些请求是不需要经过后台处理的（如：css、html、jpg、js等等文件），这些不需要经过后台处理的文件称为静态文件。让动态网站里的动态网页根据一定规则把不变的资源和经常变的资源区分开来，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作。提高资源响应的速度。</p></blockquote><p><a href="https://imgtu.com/i/6jaFiV"><img src="https://z3.ax1x.com/2021/03/26/6jaFiV.png" alt="6jaFiV.png"></a></p><p>目前，通过使用Nginx大大提高了我们网站的响应速度，优化了用户体验，让网站的健壮性更上一层楼！</p><h1 id="Nginx的安装"><a href="#Nginx的安装" class="headerlink" title="Nginx的安装"></a>Nginx的安装</h1><h2 id="windows下安装"><a href="#windows下安装" class="headerlink" title="windows下安装"></a>windows下安装</h2><p><strong>1、下载nginx</strong></p><p><a href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a> 下载稳定版本。<br>以nginx/Windows-1.16.1为例，直接下载 nginx-1.16.1.zip。<br>下载后解压，解压后如下：</p><p><a href="https://imgtu.com/i/6ja9Zn"><img src="https://z3.ax1x.com/2021/03/26/6ja9Zn.png" alt="6ja9Zn.png"></a></p><p><strong>2、启动nginx</strong></p><p>有很多种方法启动nginx</p><p>(1)直接双击nginx.exe，双击后一个黑色的弹窗一闪而过</p><p>(2)打开cmd命令窗口，切换到nginx解压目录下，输入命令 <code>nginx.exe</code> ，回车即可</p><p><strong>3、检查nginx是否启动成功</strong></p><p>直接在浏览器地址栏输入网址 <a href="http://localhost/">http://localhost:80</a> 回车，出现以下页面说明启动成功！</p><p><a href="https://imgtu.com/i/6jaCaq"><img src="https://z3.ax1x.com/2021/03/26/6jaCaq.png" alt="6jaCaq.png"></a>](<a href="https://imgtu.com/i/6jUxMQ">https://imgtu.com/i/6jUxMQ</a>)</p><p><strong>4、配置监听</strong></p><p>nginx的配置文件是conf目录下的nginx.conf，默认配置的nginx监听的端口为80，如果80端口被占用可以修改为未被占用的端口即可。</p><p><a href="https://imgtu.com/i/6jaEzF"><img src="https://z3.ax1x.com/2021/03/26/6jaEzF.png" alt="6jaEzF.png"></a></p><p>当我们修改了nginx的配置文件nginx.conf 时，不需要关闭nginx后重新启动nginx，只需要执行命令 <code>nginx -s reload</code> 即可让改动生效</p><p><strong>5、关闭nginx</strong></p><p>如果使用cmd命令窗口启动nginx， 关闭cmd窗口是不能结束nginx进程的，可使用两种方法关闭nginx</p><p>(1)输入nginx命令 <code>nginx -s stop</code>(快速停止nginx) 或 <code>nginx -s quit</code>(完整有序的停止nginx)</p><p>(2)使用taskkill <code>taskkill /f /t /im nginx.exe</code></p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">taskkill是用来终止进程的，/f是强制终止 ./t终止指定的进程和任何由此启动的子进程。/im示指定的进程名称 <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="linux下安装"><a href="#linux下安装" class="headerlink" title="linux下安装"></a>linux下安装</h2><p><strong>1、安装gcc</strong></p><p>安装 nginx 需要先将官网下载的源码进行编译，编译依赖 gcc 环境，如果没有 gcc 环境，则需要安装：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> gcc-c++<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>2、PCRE pcre-devel 安装</strong></p><p>PCRE(Perl Compatible Regular Expressions) 是一个Perl库，包括 perl 兼容的正则表达式库。nginx 的 http 模块使用 pcre 来解析正则表达式，所以需要在 linux 上安装 pcre 库，pcre-devel 是使用 pcre 开发的一个二次开发库。nginx也需要此库。命令：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> -y pcre pcre-devel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>3、zlib 安装</strong></p><p>zlib 库提供了很多种压缩和解压缩的方式， nginx 使用 zlib 对 http 包的内容进行 gzip ，所以需要在 Centos 上安装 zlib 库。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> -y zlib zlib-devel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>4、OpenSSL 安装</strong><br>OpenSSL 是一个强大的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及 SSL 协议，并提供丰富的应用程序供测试或其它目的使用。<br>nginx 不仅支持 http 协议，还支持 https（即在ssl协议上传输http），所以需要在 Centos 安装 OpenSSL 库。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> -y openssl openssl-devel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><strong>5、下载安装包</strong></p><p>手动下载.tar.gz安装包，地址：<a href="https://nginx.org/en/download.html">https://nginx.org/en/download.html</a></p><p><a href="https://imgtu.com/i/6jaARU"><img src="https://z3.ax1x.com/2021/03/26/6jaARU.png" alt="6jaARU.png"></a></p><p>下载完毕上传到服务器上 /root</p><p><strong>6、解压</strong></p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> -zxvf nginx-1.18.0.tar.gzcd nginx-1.18.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p><a href="https://imgtu.com/i/6jaPI0"><img src="https://z3.ax1x.com/2021/03/26/6jaPI0.png" alt="6jaPI0.png"></a></p><p><strong>7、配置</strong></p><p>使用默认配置，在nginx根目录下执行</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./configuremakemake <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>查找安装路径： <code>whereis nginx</code></p><p><a href="https://imgtu.com/i/6jakGT"><img src="https://z3.ax1x.com/2021/03/26/6jakGT.png" alt="6jakGT.png"></a></p><h2 id="Nginx常用命令"><a href="#Nginx常用命令" class="headerlink" title="Nginx常用命令"></a>Nginx常用命令</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /usr/local/nginx/sbin/./nginx  启动./nginx -s stop  停止./nginx -s quit  安全退出./nginx -s reload  重新加载配置文件ps aux<span class="token operator">|</span><span class="token function">grep</span> nginx  查看nginx进程<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>启动成功访问 服务器ip:80</p><p><a href="https://imgtu.com/i/6jUxMQ"><img src="https://z3.ax1x.com/2021/03/26/6jUxMQ.png" alt="6jUxMQ.png"></a></p><p>注意：如何连接不上，检查阿里云安全组是否开放端口，或者服务器防火墙是否开放端口！<br>相关命令：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 开启</span><span class="token function">service</span> firewalld start<span class="token comment"># 重启</span><span class="token function">service</span> firewalld restart<span class="token comment"># 关闭</span><span class="token function">service</span> firewalld stop<span class="token comment"># 查看防火墙规则</span>firewall-cmd --list-all<span class="token comment"># 查询端口是否开放</span>firewall-cmd --query-port<span class="token operator">=</span><span class="token number">8080</span>/tcp<span class="token comment"># 开放80端口</span>firewall-cmd --permanent --add-port<span class="token operator">=</span><span class="token number">80</span>/tcp<span class="token comment"># 移除端口</span>firewall-cmd --permanent --remove-port<span class="token operator">=</span><span class="token number">8080</span>/tcp<span class="token comment">#重启防火墙(修改配置后要重启防火墙)</span>firewall-cmd --reload<span class="token comment"># 参数解释1、firwall-cmd：是Linux提供的操作firewall的一个工具；2、--permanent：表示设置为持久；3、--add-port：标识添加的端口；</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h1 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">upstream lb<span class="token punctuation">{</span>    server <span class="token number">127.0</span>.0.1:8080 <span class="token assign-left variable">weight</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>    server <span class="token number">127.0</span>.0.1:8081 <span class="token assign-left variable">weight</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>location / <span class="token punctuation">{</span>    proxy_pass http://lb<span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> JavaWeb </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ngnix </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSS-Float</title>
+      <link href="posts/5788.html"/>
+      <url>posts/5788.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="css"><a href="#css" class="headerlink" title="css"></a>css</h2><h3 id="父级边框高度塌陷问题"><a href="#父级边框高度塌陷问题" class="headerlink" title="父级边框高度塌陷问题"></a>父级边框高度塌陷问题</h3><ol><li><p>增加父级元素的高度~(不建议使用)</p><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">#father</span> <span class="token punctuation">{</span>    <span class="token property">border</span><span class="token punctuation">:</span>1px #000 solid<span class="token punctuation">;</span>    <span class="token property">height</span><span class="token punctuation">:</span>800px<span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>增加一个空的div标签，清除浮动</p><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;div class="clear"&gt;&lt;/div&gt;.clear</span><span class="token punctuation">{</span>    <span class="token property">clear</span><span class="token punctuation">:</span>both<span class="token punctuation">;</span>    <span class="token property">margin</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>    <span class="token property">padding</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>overflow</p><pre class="line-numbers language-css" data-language="css"><code class="language-css">在父级元素中增加一个 <span class="token property">overflow</span><span class="token punctuation">:</span>hidden<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>父类添加伪类(最好)after</p><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">#father:after</span><span class="token punctuation">{</span>    <span class="token property">content</span><span class="token punctuation">:</span><span class="token string">''</span><span class="token punctuation">;</span>    <span class="token property">display</span><span class="token punctuation">:</span>block<span class="token punctuation">;</span>    <span class="token property">clear</span><span class="token punctuation">:</span>both<span class="token punctuation">;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li></ol><p>小结：</p><ol><li><p>浮动元素后面增加空div</p><p>简单，代码中尽量避免空div</p></li><li><p>设置父元素的高度</p><p>简单，元素假设有了固定的高度就会被限制</p></li><li><p>overflow</p><p>简单，但是下拉的一些场景避免使用</p></li><li><p>父类添加一个伪类：after（推荐）</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> css </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JavaGUI</title>
       <link href="posts/317b.html"/>
       <url>posts/317b.html</url>
@@ -183,11 +583,11 @@
     
     
     <entry>
-      <title>Hello World</title>
+      <title>hexo</title>
       <link href="posts/3eeb.html"/>
       <url>posts/3eeb.html</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="hexo命令"><a href="#hexo命令" class="headerlink" title="hexo命令"></a>hexo命令</h2><h3 id="创建一个新的post"><a href="#创建一个新的post" class="headerlink" title="创建一个新的post"></a>创建一个新的post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo n <span class="token string">"博客名称"</span>  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo new <span class="token string">"博客名称"</span>   <span class="token comment">#这两个都是创建新文章，前者是简写模式</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="启动本地服务预览"><a href="#启动本地服务预览" class="headerlink" title="启动本地服务预览"></a>启动本地服务预览</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo s  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo server  <span class="token comment">#启动服务预览</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo g  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo generate  <span class="token comment">#生成</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo d  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo deploy  <span class="token comment">#部署</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
       
       
       <categories>
