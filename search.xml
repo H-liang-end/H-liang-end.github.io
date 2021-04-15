@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>Maven安装及环境配置</title>
+      <link href="posts/e20a.html"/>
+      <url>posts/e20a.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Maven安装及环境配置"><a href="#Maven安装及环境配置" class="headerlink" title="Maven安装及环境配置"></a>Maven安装及环境配置</h1><p><code>https://maven.apache.org/</code></p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载压缩包到本地解压即可</p><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="在系统的环境变量中配置"><a href="#在系统的环境变量中配置" class="headerlink" title="在系统的环境变量中配置"></a>在系统的环境变量中配置</h3><pre class="line-numbers language-text" data-language="text"><code class="language-text">M2_HOME     maven目录下的bin目录MAVEN_HOME      maven的目录在系统的path中配置  %MAVEN_HOME%\bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>然后输入<code>mvn -version</code>进行检测</p><h3 id="配置阿里云镜像"><a href="#配置阿里云镜像" class="headerlink" title="配置阿里云镜像"></a>配置阿里云镜像</h3><p>在maven的目录结构下的conf文件夹下的setting.xml文件进行配置</p><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">&gt;</span></span>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>nexus-aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>*,!jeecg,!jeecg-snapshots<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>Nexus aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">&gt;</span></span>http://maven.aliyun.com/nexus/content/groups/public<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="建立一个本地的Maven仓库-localRepository"><a href="#建立一个本地的Maven仓库-localRepository" class="headerlink" title="建立一个本地的Maven仓库(localRepository)"></a>建立一个本地的Maven仓库(localRepository)</h3><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>localRepository</span><span class="token punctuation">&gt;</span></span>D:\Environment\apache-maven-3.6.2\maven-repo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>localRepository</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> JavaWeb </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Maven </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL数据库的安装</title>
+      <link href="posts/3afb.html"/>
+      <url>posts/3afb.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="MySQL数据库的安装"><a href="#MySQL数据库的安装" class="headerlink" title="MySQL数据库的安装"></a>MySQL数据库的安装</h1><h2 id="首先去官网下载MySQL-这里建议使用压缩版的"><a href="#首先去官网下载MySQL-这里建议使用压缩版的" class="headerlink" title="首先去官网下载MySQL(这里建议使用压缩版的)"></a>首先去官网下载MySQL(这里建议使用压缩版的)</h2><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a><a href="https://www.mysql.com/">MySQL</a></h3><blockquote><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3></blockquote><ol><li><p>解压到想要解压到的文件夹，例如：E:\Environment\mysql-5.7</p></li><li><p>添加环境变量</p><pre class="line-numbers language-text" data-language="text"><code class="language-text">选择PATH并在其后面添加mysql安装文件下面的bin文件夹<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>编辑my.ini文件，并且注意替换路径的位置</p><pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token selector">[mysqld]</span><span class="token constant">basedir</span><span class="token attr-value"><span class="token punctuation">=</span>E:\Environment\mysql-5.7\</span><span class="token constant">datadir</span><span class="token attr-value"><span class="token punctuation">=</span>E:\Environment\mysql-5.7\data\</span><span class="token constant">port</span><span class="token attr-value"><span class="token punctuation">=</span>3306</span>skip-grant-tables<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>打开管理员权限的CMD，并切换到mysql下的bin目录，输入<code>mysqld-install</code>安装Mysql</p></li><li><p>输入<code>mysqld --initialize-insecure --user=mysql</code>初始化数据文件</p></li><li><p>启动Mysql用命令<code>mysql -u root -p</code>进入mysql管理员界面（密码可以是空的）</p></li><li><p>进入界面后更改root密码（此操作是在<code>mysql&gt;</code>的命令下）</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">update mysql.user <span class="token builtin class-name">set</span> <span class="token assign-left variable">authentication_string</span><span class="token operator">=</span>password<span class="token punctuation">(</span><span class="token string">'123456'</span><span class="token punctuation">)</span> where <span class="token assign-left variable">user</span><span class="token operator">=</span><span class="token string">'root'</span> and Host <span class="token operator">=</span> <span class="token string">'localhost'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>刷新权限（此操作是在<code>mysql&gt;</code>的命令下）</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">flush privileges<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>修改my.ini文件并把最后一句<code>skip-grant-tables</code></p></li><li><p>重启Mysql</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">net stop mysqlnet start mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li><p>输入以下命令<code>mysql -uroot -p123456</code>,出现 <code>mysql&gt;</code>就行了</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> JavaWeb </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux下SSH远程连接断开后让程序继续运行解决办法、在后台运行</title>
       <link href="posts/348c.html"/>
       <url>posts/348c.html</url>
