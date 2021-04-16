@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>hexo</title>
+      <link href="posts/536e.html"/>
+      <url>posts/536e.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="hexo命令"><a href="#hexo命令" class="headerlink" title="hexo命令"></a>hexo命令</h2><h3 id="创建一个新的post"><a href="#创建一个新的post" class="headerlink" title="创建一个新的post"></a>创建一个新的post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo n <span class="token string">"博客名称"</span>  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo new <span class="token string">"博客名称"</span>   <span class="token comment">#这两个都是创建新文章，前者是简写模式</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="创建博客时的属性"><a href="#创建博客时的属性" class="headerlink" title="创建博客时的属性"></a>创建博客时的属性</h3><ul><li><code>title</code><ul><li>Markdown的文件标题文,章标题</li></ul></li><li><code>summary</code><ul><li>文章摘要，自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要</li></ul></li><li><code>categories</code><ul><li>文章分类，本主题的分类表示宏观上大的分类，只建议一篇文章一个分类</li></ul></li></ul><h3 id="启动本地服务预览"><a href="#启动本地服务预览" class="headerlink" title="启动本地服务预览"></a>启动本地服务预览</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo s  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo server  <span class="token comment">#启动服务预览</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo g  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo generate  <span class="token comment">#生成</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo d  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo deploy  <span class="token comment">#部署</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> hexo的使用 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Maven安装及环境配置</title>
       <link href="posts/e20a.html"/>
       <url>posts/e20a.html</url>
@@ -625,31 +650,6 @@
         <tags>
             
             <tag> JavaString </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>hexo</title>
-      <link href="posts/3eeb.html"/>
-      <url>posts/3eeb.html</url>
-      
-        <content type="html"><![CDATA[<h2 id="hexo命令"><a href="#hexo命令" class="headerlink" title="hexo命令"></a>hexo命令</h2><h3 id="创建一个新的post"><a href="#创建一个新的post" class="headerlink" title="创建一个新的post"></a>创建一个新的post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo n <span class="token string">"博客名称"</span>  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo new <span class="token string">"博客名称"</span>   <span class="token comment">#这两个都是创建新文章，前者是简写模式</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="启动本地服务预览"><a href="#启动本地服务预览" class="headerlink" title="启动本地服务预览"></a>启动本地服务预览</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo s  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo server  <span class="token comment">#启动服务预览</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo g  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo generate  <span class="token comment">#生成</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo d  <span class="token operator">=</span><span class="token operator">&gt;</span> hexo deploy  <span class="token comment">#部署</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> hexo的使用 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> hexo </tag>
             
         </tags>
       
