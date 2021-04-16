@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Java安装配置环境变量</title>
+      <link href="posts/217f.html"/>
+      <url>posts/217f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Java安装配置环境变量"><a href="#Java安装配置环境变量" class="headerlink" title="Java安装配置环境变量"></a>Java安装配置环境变量</h1><h2 id="一、下载JDK"><a href="#一、下载JDK" class="headerlink" title="一、下载JDK"></a>一、下载JDK</h2><p>下载地址：<a href="https://www.oracle.com/java/technologies/javase-downloads.html">https://www.oracle.com/java/technologies/javase-downloads.html</a></p><h2 id="二、JAVA-JDK环境变量配置"><a href="#二、JAVA-JDK环境变量配置" class="headerlink" title="二、JAVA-JDK环境变量配置"></a>二、JAVA-JDK环境变量配置</h2><h3 id="1-在系统变量下新建JAVA-HOME变量"><a href="#1-在系统变量下新建JAVA-HOME变量" class="headerlink" title="1.在系统变量下新建JAVA_HOME变量"></a>1.在系统变量下新建<code>JAVA_HOME</code>变量</h3><pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token attr-name">变量名</span><span class="token punctuation">:</span><span class="token attr-value">JAVA_HOME</span><span class="token attr-name">变量值</span><span class="token punctuation">:</span><span class="token attr-value">C:\Program Files\Java\jdk1.8.0</span><span class="token comment">#这里的变量值为jdk安装的路径</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="2-系统变量→寻找-Path-变量→编辑→新建"><a href="#2-系统变量→寻找-Path-变量→编辑→新建" class="headerlink" title="2. 系统变量→寻找 Path 变量→编辑→新建"></a>2. 系统变量→寻找 Path 变量→编辑→新建</h3><pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token comment">#在变量值后面输入</span>%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="3-系统变量→新建-CLASSPATH-变量"><a href="#3-系统变量→新建-CLASSPATH-变量" class="headerlink" title="3.系统变量→新建 CLASSPATH 变量"></a>3.系统变量→新建 CLASSPATH 变量</h3><pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token attr-name">变量名</span><span class="token punctuation">:</span><span class="token attr-value">CLASSPATH</span><span class="token attr-name">变量值</span><span class="token punctuation">:</span><span class="token attr-value">.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="4-测试java环境是否配置成功"><a href="#4-测试java环境是否配置成功" class="headerlink" title="4.测试java环境是否配置成功"></a>4.测试java环境是否配置成功</h3><p>运行cmd 输入 <code>java -version</code> （java 和 -version 之间有空格）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> JDK </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JDK </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HTML5</title>
       <link href="posts/fe94.html"/>
       <url>posts/fe94.html</url>
